@@ -1,0 +1,6 @@
+<!-- games: IGame[] -->
+<ol>
+  <li *ngFor="let game of games">
+    <a (click)="getGame(game.id)">{{ game.id }}</a>
+  </li>
+</ol>
