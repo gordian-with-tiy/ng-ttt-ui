@@ -1,0 +1,29 @@
+<div class="board-container" *ngIf="selectedGame">
+  <div class="board">
+    <div class="row" 
+    *ngFor="let row of selectedGame.board; index as rowIndex">
+      <div class="col" *ngFor="let move of row; index as colIndex">
+        <span *ngIf="move === 0 && selectedGame.winner === undefined"
+          class="clickable" 
+          (click)="moveInSquare(rowIndex, colIndex)"></span>
+        <span *ngIf="move === 1">×</span>
+        <span *ngIf="move === 2">○</span>
+      </div>
+    </div>
+  </div>
+  <div class="announcement" *ngIf="selectedGame.winner === 0">
+    TIE!
+  </div>
+  <div class="announcement" *ngIf="selectedGame.winner === 1 && selectedGame.humanMovesFirst">
+    You won!
+  </div>
+  <div class="announcement" *ngIf="selectedGame.winner === 2 && !selectedGame.humanMovesFirst">
+    You won!
+  </div>
+  <div class="announcement" *ngIf="selectedGame.winner === 1 && !selectedGame.humanMovesFirst">
+    Computer won!
+  </div>
+  <div class="announcement" *ngIf="selectedGame.winner === 2 && selectedGame.humanMovesFirst">
+    Computer won!
+  </div>
+</div>

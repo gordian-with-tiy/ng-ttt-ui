@@ -5,8 +5,7 @@ import { IGame, DataService } from '../data.service';
 @Component({
   selector: 'app-game-list',
   templateUrl: './game-list.component.html',
-  styleUrls: ['./game-list.component.css'],
-  providers: [DataService]
+  styleUrls: ['./game-list.component.css']
 })
 export class GameListComponent implements OnInit {
   private games: IGame[];
@@ -28,17 +27,6 @@ export class GameListComponent implements OnInit {
 
   showGame(game: IGame): void {
     this.selectedGame = game;
-  }
-
-  moveInSquare(rowIndex: number, columnIndex: number): void {
-    this.service
-      .makeMove(this.selectedGame.id, rowIndex, columnIndex)
-      .subscribe(
-        game => {
-          this.selectedGame.winner = game.winner;
-          this.selectedGame.board = game.board;
-        }
-      )
   }
 
   deleteGame(game, e: Event) {

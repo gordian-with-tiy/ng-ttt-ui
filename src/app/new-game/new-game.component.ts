@@ -4,8 +4,7 @@ import { DataService } from '../data.service';
 @Component({
   selector: 'app-new-game',
   templateUrl: './new-game.component.html',
-  styleUrls: ['./new-game.component.css'],
-  providers: [DataService]
+  styleUrls: ['./new-game.component.css']
 })
 export class NewGameComponent implements OnInit {
   private message: string;
