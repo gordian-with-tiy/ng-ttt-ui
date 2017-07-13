@@ -1,12 +1,17 @@
 <div class="bar">
-  <header>
-    Start a new game by clicking one of the buttons.
-  </header>
-  <div>
-    <button (click)="createHumanGame()">I will move first</button>
-  </div>
-  <div>
-    <button (click)="createComputerGame()">Let the computer move</button>
-  </div>
+  <form #formy="ngForm" style="display: flex; flex: 1 0 0px;">
+    <header>
+      Enter name. Click button.
+    </header>
+    <div>
+      <input [(ngModel)]="playerName" minlength="5" name="askdjfh" required type="email" placeholder="your email" email>
+    </div>
+    <div>
+      <button [disabled]="!playerName"  (click)="createHumanGame()">I will move first</button>
+    </div>
+    <div>
+      <button [disabled]="!formy.valid" (click)="createComputerGame()">Let the computer move</button>
+    </div>
+  </form>
 </div>
 <div class="message">{{ message }}</div>

@@ -30,6 +30,10 @@ button {
   cursor: pointer;
 }
 
+button[disabled] {
+  background-color: cyan;
+}
+
 button:hover, button:focus {
   background-color: rgba(255, 255, 255, .75);
 }
@@ -60,4 +64,8 @@ div {
 
 .message:empty {
   transform: translateY(0px);
+}
+.ng-touched.ng-invalid {
+  background-color: red;
+  color: white;
 }
