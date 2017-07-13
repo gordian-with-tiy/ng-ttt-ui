@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { IGame, DataService } from '../data.service';
 
@@ -12,21 +12,33 @@ export class GameListComponent implements OnInit {
   private error: string;
   private selectedGame: IGame;
 
+  @Output()
+  gameSelected: EventEmitter<IGame>;
+
   constructor(private service: DataService) {
     this.games = [];
+    this.gameSelected = new EventEmitter<IGame>();
+    this.service
+      .gameAdded
+      .subscribe(() => this.loadGames());
   }
 
   ngOnInit() {
+    this.loadGames();
+  }
+
+  private loadGames() {
     this.service
       .getAll()
       .subscribe(
         games => this.games = games,
         error => this.error = `ERROR! ${error}`
-      )
+      );
   }
 
   showGame(game: IGame): void {
     this.selectedGame = game;
+    this.gameSelected.emit(game);
   }
 
   deleteGame(game, e: Event) {

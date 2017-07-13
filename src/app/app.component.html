@@ -1,2 +1,5 @@
 <app-new-game></app-new-game>
-<app-game-list></app-game-list>
+<div class="main">
+  <app-game-list (gameSelected)="onGameSelected($event)"></app-game-list>
+  <app-game-board [selectedGame]="selectedGame"></app-game-board>
+</div>

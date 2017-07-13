@@ -1,3 +1,8 @@
+:host {
+  display: flex;
+  flex: 1 0 0px;
+}
+
 .board-container {
   flex: 1 0 0px;
   display: flex;

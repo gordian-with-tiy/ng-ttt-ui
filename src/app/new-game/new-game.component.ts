@@ -18,7 +18,7 @@ export class NewGameComponent implements OnInit {
 
   createHumanGame() {
     this.message = 'One moment, please...';
-    this.service
+    let subscriprtion = this.service
       .create(true)
       .subscribe(
         () => this.message = '',

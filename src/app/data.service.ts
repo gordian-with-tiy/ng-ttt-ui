@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from "rxjs/Subject";
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 export interface IGame {
   id: number;
@@ -36,8 +38,12 @@ class Game implements IGame {
 @Injectable()
 export class DataService {
   endpoint = 'http://localhost:10010/games';
+  
+  gameAdded: Subject<IGame>;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+    this.gameAdded = new Subject<IGame>();
+  }
 
   getAll(): Observable<IGame[]> {
     return this.http
@@ -49,7 +55,9 @@ export class DataService {
   create(humanMovesFirst: boolean): Observable<IGame> {
     return this.http
       .post(this.endpoint, { humanMovesFirst })
-      .map(response => response.json());
+      .map(response => response.json())
+      .do(game => this.gameAdded.next(game))
+      .do(game => console.log(game));
   }
 
   makeMove(id: number, rowIndex: number, columnIndex: number)
