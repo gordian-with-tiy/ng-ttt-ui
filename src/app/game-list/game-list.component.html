@@ -1,6 +1,52 @@
 <!-- games: IGame[] -->
-<ol>
-  <li *ngFor="let game of games">
-    <a (click)="getGame(game.id)">{{ game.id }}</a>
-  </li>
-</ol>
+<div class="list-container">
+  <h2>Ongoing Games</h2>
+  <ul>
+    <li [ngClass]="{ selected: this.selectedGame && game.id === this.selectedGame.id }"
+        *ngFor="let game of ongoingGames"
+        (click)="showGame(game)">
+      <div *ngIf="game.humanMovesFirst" class="primary">You started</div>
+      <div *ngIf="!game.humanMovesFirst" class="primary">Computer started</div>
+      <div *ngIf="game.winner === undfefined" class="secondary">{{ game.numberOfMoves() }} moves made</div>
+      <div *ngIf="game.winner !== undfefined" class="secondary">Game over</div>
+    </li>
+  </ul>
+  <h2>Finished Games</h2>
+  <ul>
+    <li [ngClass]="{ selected: this.selectedGame && game.id === this.selectedGame.id }"
+        *ngFor="let game of finishedGames"
+        (click)="showGame(game)">
+      <span class="deleter" (click)="deleteGame(game, $event)">×</span>
+      <div *ngIf="game.humanMovesFirst" class="primary">You started</div>
+      <div *ngIf="!game.humanMovesFirst" class="primary">Computer started</div>
+      <div *ngIf="game.winner === undfefined" class="secondary">{{ game.numberOfMoves() }} moves made</div>
+      <div *ngIf="game.winner !== undfefined" class="secondary">Game over</div>
+    </li>
+  </ul>
+</div>
+<div class="board-container" *ngIf="selectedGame">
+  <div class="board">
+    <div class="row" *ngFor="let row of selectedGame.board index as rowIndex">
+      <div class="col" *ngFor="let move of row; index as colIndex">
+        <span *ngIf="move === 0 && selectedGame.winner === undefined" class="clickable" (click)="moveInSquare(rowIndex, colIndex)"></span>
+        <span *ngIf="move === 1">×</span>
+        <span *ngIf="move === 2">○</span>
+      </div>
+    </div>
+  </div>
+  <div class="announcement" *ngIf="selectedGame.winner === 0">
+    TIE!
+  </div>
+  <div class="announcement" *ngIf="selectedGame.winner === 1 && selectedGame.humanMovesFirst">
+    You won!
+  </div>
+  <div class="announcement" *ngIf="selectedGame.winner === 2 && !selectedGame.humanMovesFirst">
+    You won!
+  </div>
+  <div class="announcement" *ngIf="selectedGame.winner === 1 && !selectedGame.humanMovesFirst">
+    Computer won!
+  </div>
+  <div class="announcement" *ngIf="selectedGame.winner === 2 && selectedGame.humanMovesFirst">
+    Computer won!
+  </div>
+</div>

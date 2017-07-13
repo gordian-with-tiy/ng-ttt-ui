@@ -1,3 +1,63 @@
+:host {
+  position: relative;
+  display: block;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  background-color: #b71c1c;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+  height: 66px;
+}
+
+header {
+  margin: 16px 0;
+  padding: 0 16px;
+  font-size: 1.15rem;
+  color: white;
+}
+
 button {
-  background-color: cyan;
+  border: 0;
+  padding: 8px 16px;
+  background-color: transparent;
+  transition: box-shadow 200ms;
+  background-color: white;
+  cursor: pointer;
+}
+
+button:hover, button:focus {
+  background-color: rgba(255, 255, 255, .75);
+}
+
+button:active {
+  background-color: #ef9a9a;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 1);
+  color: white;
+}
+
+div {
+  margin: 16px 0;
+  padding: 0 16px;
+}
+
+.message {
+  margin: 0;
+  padding: 16px;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(66px);
+  transition: transform 200ms;
+  background-color: #ff8a80;
+}
+
+.message:empty {
+  transform: translateY(0px);
 }

@@ -17,10 +17,20 @@ export class NewGameComponent implements OnInit {
   ngOnInit() {
   }
 
-  createGame() {
+  createHumanGame() {
     this.message = 'One moment, please...';
     this.service
       .create(true)
+      .subscribe(
+        () => this.message = '',
+        error => this.message = `ERROR! ${error}`
+      );
+  }
+
+  createComputerGame() {
+    this.message = 'One moment, please...';
+    this.service
+      .create(false)
       .subscribe(
         () => this.message = '',
         error => this.message = `ERROR! ${error}`

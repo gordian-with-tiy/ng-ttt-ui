@@ -1,2 +1,12 @@
-<button (click)="createGame()">New Game!</button>
-<h1>{{ message }}</h1>
+<div class="bar">
+  <header>
+    Start a new game by clicking one of the buttons.
+  </header>
+  <div>
+    <button (click)="createHumanGame()">I will move first</button>
+  </div>
+  <div>
+    <button (click)="createComputerGame()">Let the computer move</button>
+  </div>
+</div>
+<div class="message">{{ message }}</div>

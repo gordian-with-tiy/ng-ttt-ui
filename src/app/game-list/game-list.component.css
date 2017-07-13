@@ -1,0 +1,92 @@
+:host {
+  display: flex;
+}
+
+.list-container {
+  flex: 0 0 250px;
+}
+
+h2 {
+  margin: 32px 0 0 16px;
+  font-size: 14px;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  border: 0;
+  border-left: 4px solid transparent;
+  cursor: pointer;
+  margin: 8px 0;
+  padding: 0 16px;
+  height: 54px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.selected {
+  border-left-color: #ff8a80;
+}
+
+.primary {
+  font-size: 16px;
+}
+
+.secondary {
+  color: rgba(0, 0, 0, .6);
+}
+
+.board-container {
+  flex: 1 0 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board {
+  margin-top: 54px;
+  border: 1px solid black;
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  font-size: 75px;
+}
+
+.clickable {
+  cursor: pointer;
+  height: 100px;
+  width: 100px;
+}
+
+.announcement {
+  font-size: 54px;
+}
+
+.deleter {
+  position: absolute;
+  right: 8px;
+  top: 16px;
+  width: 24px;
+  height: 24px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.deleter:hover {
+  background-color: rgba(0, 0, 0, .2);
+}

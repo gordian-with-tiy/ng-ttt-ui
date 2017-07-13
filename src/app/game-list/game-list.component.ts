@@ -11,8 +11,11 @@ import { IGame, DataService } from '../data.service';
 export class GameListComponent implements OnInit {
   private games: IGame[];
   private error: string;
+  private selectedGame: IGame;
 
-  constructor(private service: DataService) { }
+  constructor(private service: DataService) {
+    this.games = [];
+  }
 
   ngOnInit() {
     this.service
@@ -23,8 +26,41 @@ export class GameListComponent implements OnInit {
       )
   }
 
-  getGame(id: number): void {
-    alert(`You chose game ${id}`);
+  showGame(game: IGame): void {
+    this.selectedGame = game;
+  }
+
+  moveInSquare(rowIndex: number, columnIndex: number): void {
+    this.service
+      .makeMove(this.selectedGame.id, rowIndex, columnIndex)
+      .subscribe(
+        game => {
+          this.selectedGame.winner = game.winner;
+          this.selectedGame.board = game.board;
+        }
+      )
+  }
+
+  deleteGame(game, e: Event) {
+    e.stopPropagation();
+    if (game.id === this.selectedGame.id) {
+      this.selectedGame = null;
+    }
+    this.service
+      .deleteGame(game)
+      .subscribe(
+        () => this.ngOnInit()
+      );
+  }
+
+  get ongoingGames() {
+    return this.games
+      .filter(g => g.winner === undefined);
+  }
+
+  get finishedGames() {
+    return this.games
+      .filter(g => g.winner !== undefined);
   }
 
 }
